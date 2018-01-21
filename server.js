@@ -7,15 +7,16 @@ var firebase = require("firebase");
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const _ = require('lodash');
+var path = require('path');
 
 
 var app = express();
 
-app.set("view engine", "hbs");
+//app.set("view engine", "html");
 app.use(express.static(__dirname))
+// app.use(express.static(__dirname + '/views'))
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 var config = {
   apiKey: "AIzaSyCqzuKg8ftrSN84qf-46BHPKd1RsmfkF7Q",
@@ -24,9 +25,6 @@ var config = {
   storageBucket: "hackdavis2018-c31a2.appspot.com",
 };
 firebase.initializeApp(config);
-
-
-
 
 const port = 3000;
 
@@ -39,6 +37,10 @@ app.get('/greeting', (req, res) =>
 
 app.get('/', (req, res) =>
 {
+  //console.log("Path: " + path.join(__dirname + '/login.html'));
+  // console.log('Going to the login page');
+  // res.sendFile(path.join('/login.html'));
+
   res.render('testingForm.hbs');
 }
 );
@@ -86,10 +88,72 @@ app.post('/signIn', (req, res) => {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
+    if (errorCode === 'auth/wrong-password') {
+      alert('Wrong password.');
+    }
+    else
+    {
+      alert(errorMessage);
+    }
     // ...
-  });
-res.render('finishedSigningIn.hbs');
+  }).then(() => {
+    var user = firebase.auth().currentUser;
+    if (user) {
+      console.log("logged the user in. The user's email is: " + user.uid);
+      firebase.database().ref('users/' + user.uid).update({
+        name: 'Dhruv Soni',
 
+      });
+      //firebase.database().ref('users/' + user.uid).toJSON;
+      // console.log("Added the username into the database: "  + firebase.database().ref('users/' + user.uid).toJSON());
+    }
+    else
+    {
+        console.log("User was not able to log in.");
+    }
+  });
+
+
+  res.render('milesrun.hbs');
+
+});
+
+app.post('/addData', (req, res) => {
+
+  var milescovered = req.body.miles;
+
+  var user = firebase.auth().currentUser;
+  if(user)
+  {
+  firebase.database().ref('users/' + user.uid).push({
+    miles: milescovered
+  });
+}
+
+  else
+  {
+      console.log("Re-enter Log-In Details");
+  }
+
+
+  console.log("miles: " + milescovered); //+ password);
+
+
+
+
+  res.render('testingForm.hbs');
+});
+
+
+app.post('/signOut', (req, res) =>
+{
+    firebase.auth().signOut().then(function()
+    {
+      // Sign-out successful.
+    }).catch(function(error)
+    {
+      // An error happened.
+    });
 });
 
 

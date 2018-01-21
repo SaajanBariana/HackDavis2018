@@ -21,7 +21,8 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form>
+
+        <form method = "post" action = "/signIn">
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -38,9 +39,10 @@
           </div>
           <a class="btn btn-primary btn-block" href="index.html">Login</a>
         </form>
+
         <div class="text-center">
           <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          
         </div>
       </div>
     </div>
@@ -51,22 +53,5 @@
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
-
-<!--
-Firebase code below
--->
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCqzuKg8ftrSN84qf-46BHPKd1RsmfkF7Q",
-    authDomain: "hackdavis2018-c31a2.firebaseapp.com",
-    databaseURL: "https://hackdavis2018-c31a2.firebaseio.com",
-    projectId: "hackdavis2018-c31a2",
-    storageBucket: "",
-    messagingSenderId: "700566145383"
-  };
-  firebase.initializeApp(config);
-</script>
 
 </html>
