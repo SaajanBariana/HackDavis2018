@@ -17,6 +17,26 @@
   },
   "homepage": "https://github.com/SaajanBariana/HackDavis2018#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "bootstrap": "4.0.0",
+    "chart.js": "2.7.1",
+    "datatables.net-bs4": "1.10.16",
+    "express": "^4.16.2",
+    "firebase": "^4.9.0",
+    "font-awesome": "4.7.0",
+    "hbs": "^4.0.1",
+    "http": "0.0.0",
+    "jquery": "3.3.0",
+    "jquery.easing": "^1.4.1"
+  },
+  "devDependencies": {
+    "browser-sync": "2.23.5",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "3.9.2",
+    "gulp-header": "2.0.1",
+    "gulp-html-beautify": "^1.0.1",
+    "gulp-pug": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "3.0.0"
   }
 }
